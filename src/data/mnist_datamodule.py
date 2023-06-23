@@ -50,7 +50,7 @@ class MNISTDataModule(LightningDataModule):
 
         # data transformations
         self.transforms = transforms.Compose(
-            [transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))]
+            [transforms.ToTensor(), transforms.Pad(2)]
         )
 
         self.data_train: Optional[Dataset] = None
@@ -128,3 +128,5 @@ class MNISTDataModule(LightningDataModule):
 
 if __name__ == "__main__":
     _ = MNISTDataModule()
+    _.setup()
+    print(_.data_train[0][0].shape)
