@@ -37,7 +37,6 @@ class MNISTDataModule(LightningDataModule):
     def __init__(
         self,
         data_dir: str = "data/",
-        train_val_test_split: Tuple[int, int, int] = (55_000, 5_000, 10_000),
         batch_size: int = 64,
         num_workers: int = 0,
         pin_memory: bool = False,
@@ -77,15 +76,9 @@ class MNISTDataModule(LightningDataModule):
         """
         # load and split datasets only if not loaded already
         if not self.data_train and not self.data_val and not self.data_test:
-            trainset = MNIST(self.hparams.data_dir, train=True, transform=self.transforms)
-            testset = MNIST(self.hparams.data_dir, train=False, transform=self.transforms)
-            dataset = ConcatDataset(datasets=[trainset, testset])
-            self.data_train, self.data_val, self.data_test = random_split(
-                dataset=dataset,
-                lengths=self.hparams.train_val_test_split,
-                generator=torch.Generator().manual_seed(42),
-            )
-
+            self.data_train = MNIST(self.hparams.data_dir, train=True, transform=self.transforms)
+            self.data_val = MNIST(self.hparams.data_dir, train=False, transform=self.transforms)
+            
     def train_dataloader(self):
         return DataLoader(
             dataset=self.data_train,
@@ -98,15 +91,6 @@ class MNISTDataModule(LightningDataModule):
     def val_dataloader(self):
         return DataLoader(
             dataset=self.data_val,
-            batch_size=self.hparams.batch_size,
-            num_workers=self.hparams.num_workers,
-            pin_memory=self.hparams.pin_memory,
-            shuffle=False,
-        )
-
-    def test_dataloader(self):
-        return DataLoader(
-            dataset=self.data_test,
             batch_size=self.hparams.batch_size,
             num_workers=self.hparams.num_workers,
             pin_memory=self.hparams.pin_memory,
@@ -130,3 +114,6 @@ if __name__ == "__main__":
     _ = MNISTDataModule()
     _.setup()
     print(_.data_train[0][0].shape)
+    # print(_.data_train[0][0])
+    print(_.data_train[0][0].min())
+    print(_.data_train[0][0].max())

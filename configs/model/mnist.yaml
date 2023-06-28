@@ -3,7 +3,7 @@ _target_: src.models.mnist_module.MNISTLitModule
 net:
   _target_: src.models.components.diffusion_model.DiffusionModel
   in_size: 1
-  t_range: 100
+  t_range: 1000
   img_channels: 1
   beta_small: 0.0001
   beta_large: 0.02

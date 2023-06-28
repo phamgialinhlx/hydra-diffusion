@@ -116,7 +116,7 @@ class DiffusionModel(nn.Module):
 
 if __name__ == "__main__":
     net = DiffusionModel(32, 100)
-    img = torch.rand(1, 1, 32, 32)
+    img = torch.randn(30, 1, 32, 32)
     t = torch.randint(0, 100, [1])
     print(net(img, t).shape)
     
