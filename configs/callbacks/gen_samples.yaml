@@ -1,0 +1,7 @@
+gen_samples:
+  _target_: src.utils.callback.WandbCallback.WandbCallback
+  num_classes: 10
+  num_images: 9
+  condition: True
+  use_fixed_noise: True
+  

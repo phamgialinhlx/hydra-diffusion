@@ -38,6 +38,7 @@ class MNISTDataModule(LightningDataModule):
         self,
         data_dir: str = "data/",
         batch_size: int = 64,
+        num_classes: int = 10,
         num_workers: int = 0,
         pin_memory: bool = False,
     ):
