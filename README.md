@@ -51,4 +51,8 @@ python src/train.py trainer=gpu
 
 ## Results
 
-<img src="./assets/mnist.gif" width="640" height="480" />
+Diffusion model on MNIST
+<img src="./assets/mnist.gif" width="640" />
+
+Classifier-Free Guidance Diffusion Model on MNIST
+<img src="./assets/conditional_mnist.gif" width="640" />

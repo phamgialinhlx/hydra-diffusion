@@ -1,0 +1,11 @@
+_target_: src.models.conditional_diffusion_module.ConditionalDiffusionModule
+
+net:
+  _target_: src.models.components.conditional_diffusion_model.ConditionalDiffusionModel
+  in_size: 1
+  t_range: 1000
+  img_channels: 1
+  num_classes: 10
+  beta_small: 0.0001
+  beta_large: 0.02
+  bilinear: True
