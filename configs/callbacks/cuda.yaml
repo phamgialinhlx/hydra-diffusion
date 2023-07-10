@@ -1,0 +1,2 @@
+cuda:
+  _target_: src.utils.callback.CUDACallback.CUDACallback
