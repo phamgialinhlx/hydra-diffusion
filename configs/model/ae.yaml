@@ -1,0 +1,7 @@
+_target_: src.models.vae_module.VAEModule
+
+lr: 1e-3
+
+defaults:
+  - net: vae.yaml
+  

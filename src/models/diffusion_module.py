@@ -7,7 +7,7 @@ from torchmetrics.classification.accuracy import Accuracy
 import math
 import torch.nn as nn
 
-class MNISTLitModule(LightningModule):
+class DiffusionModule(LightningModule):
     """Example of LightningModule for MNIST classification.
 
     A LightningModule organizes your PyTorch code into 6 sections:
@@ -60,4 +60,4 @@ class MNISTLitModule(LightningModule):
 
 
 if __name__ == "__main__":
-    _ = MNISTLitModule(None, None, None)
+    _ = DiffusionModule(None, None, None)

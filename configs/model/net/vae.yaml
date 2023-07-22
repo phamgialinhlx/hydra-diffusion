@@ -1,0 +1,4 @@
+_target_: src.models.components.vae.VAE
+batch_size: 64
+in_channels: 1
+img_size: 32
