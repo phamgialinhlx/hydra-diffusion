@@ -1,0 +1,5 @@
+_target_: src.models.components.convolutional_vae.ConvolutionalVAE
+batch_size: 64
+in_channels: 1
+img_size: 32
+latent_dim: 100

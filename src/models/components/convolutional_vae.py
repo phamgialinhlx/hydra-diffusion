@@ -79,28 +79,27 @@ class ConvolutionalVAE(nn.Module):
 
     def forward_encoder(self, x):
         x = self.encoder(x)
-        x = x.view(x.size()[0], -1)
-        mu_p = self.mu(x)
-        log_var_p = self.log_var(x)
-        return [mu_p, log_var_p]
+        return x
 
     def forward_decoder(self, x):
-        x = self.decoder_linear(x)
-        x = x.view(x.size()[0], *self.conv_out_shape[1:])
+        # x = self.decoder_linear(x)
+        # x = x.view(x.size()[0], *self.conv_out_shape[1:])
         x = self.decoder(x)
         return x
 
     def forward(self, x):
-        mu_p, log_var_p = self.forward_encoder(x)
-        x = self.sampling(mu_p, log_var_p)
+        x = self.forward_encoder(x)
         x_hat = self.forward_decoder(x)
+        x = x.view(x.size()[0], -1)
+        mu_p = self.mu(x)
+        log_var_p = self.log_var(x)
         kld = 0.5 * torch.sum(
             torch.pow(mu_p, 2) + torch.pow(log_var_p, 2) - torch.log(1e-8 + torch.pow(log_var_p, 2)) - 1
         ) / (self.batch_size * self.img_size * self.img_size)
         return x_hat, kld
     
 if __name__ == "__main__":
-    net = VAE()
+    net = ConvolutionalVAE()
     x = torch.randn(56, 1, 32, 32)
     x_hat, kld = net(x)
     print(x_hat.shape)
